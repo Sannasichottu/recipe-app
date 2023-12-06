@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import {  fetchRecipes } from "./utils/Api";
+import Loader from "./components/Loader/Loader";
+import Header from "./components/Header/Header";
+
 
 function App() {
+
+  const [recipes, setRecipes] = useState([])
+  const [loading, setLoading]=useState(true)
+
+  useEffect(() =>  {
+    const fetchRecipesData = async () => {
+      try{
+        const data = await fetchRecipes()
+      // const data = await fetchRecipesById(22)
+      setRecipes(data)
+      setLoading(false)
+      }catch{
+        setLoading(false)
+      }
+      
+    }
+    fetchRecipesData()
+  },[])
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Header title={'Recie App'} />
+     {loading ? <Loader name="My data is loading" /> :  recipes.map((obj, index) => <div key={index} >  {obj.title} </div> ) }
+
+      {/* {recipes.title} */}
     </div>
   );
 }
 
 export default App;
+
