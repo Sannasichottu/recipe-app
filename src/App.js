@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {  fetchRecipes } from "./utils/Api";
 import Loader from "./components/Loader/Loader";
 import Header from "./components/Header/Header";
+import RecipesList from "./components/RecipesList/RecipesList";
 
 
 function App() {
@@ -28,7 +29,10 @@ function App() {
   return (
     <div className="App">
      <Header title={'Recie App'} />
-     {loading ? <Loader name="My data is loading" /> :  recipes.map((obj, index) => <div key={index} >  {obj.title} </div> ) }
+     
+    
+     
+     {loading ? <Loader name="My data is loading" /> :  <RecipesList recipes={recipes} />}
 
       {/* {recipes.title} */}
     </div>
