@@ -5,16 +5,24 @@
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 10px;
-        text-align: left;
-        color: #f17c7c;
+        text-align: center;
+        color: #082729;
     }
     .list {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 12px;
+        gap: 30px;
         padding: 20px;
         background-color: antiquewhite;
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            padding: 15px 0px;
+        }
+
     }
 
     .cardContainer {
@@ -26,7 +34,7 @@
         background-color: aliceblue;
         height: 100%;
         transition: transform 0.3s ease;
-        width: 300px;
+        min-width: 300px;
         padding: 10px;
 
         .cardHeader{

@@ -1,5 +1,6 @@
 import React from 'react'
 import './RecipesList.scss'
+import { Link } from 'react-router-dom'
 function RecipesList({recipes = []}) {
   return (
     <div className='recipeList'>
@@ -9,6 +10,8 @@ function RecipesList({recipes = []}) {
      <div className='list' >
         {recipes.map(recipe => (
             
+            <Link to={`/recipe/${recipe.id}`} >
+
             <div className='cardContainer' > 
                 <div className='cardHeader'>
                     {recipe.title}
@@ -24,6 +27,7 @@ function RecipesList({recipes = []}) {
                     recipe.image
                 }  alt={recipe.title} />
             </div>
+            </Link>
 
         
         ) 
