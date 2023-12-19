@@ -5,8 +5,9 @@ import Loader from "../Loader/Loader";
 import './RecipeDetail.scss'
 
 function RecipeDetail() {
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState({});
   const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const { id } = useParams();
 
@@ -24,6 +25,20 @@ function RecipeDetail() {
     fetchRecipesData();
   }, [id]);
 
+  useEffect(() => {
+    const fav = JSON.parse(localStorage.getItem('fav')) || []
+    const isRecipeFav = fav.some(reci => reci.id === recipe.id)
+    setIsFavorite(isRecipeFav)
+  },[recipe])
+
+  const handleToggleFav = () => {
+    setIsFavorite(preVal => !preVal)
+    const fav = JSON.parse(localStorage.getItem('fav')) || []
+    const updateFav = isFavorite ? fav.filter(reci => reci.id !== recipe.id)
+     : [...fav, recipe]
+    localStorage.setItem('fav',JSON.stringify(updateFav))
+  }
+
   return (
     <div>
       {loading ? (
@@ -33,7 +48,11 @@ function RecipeDetail() {
           <Link to={"/"}>Go Back</Link>
           <div className="header1">
             <h3> {recipe.title} </h3>
-            <button className="favBtn">+ Add to Favorites</button>
+            <button
+            onClick={handleToggleFav}
+            className="favBtn">
+             {!isFavorite ? '+ Add to Favorites' : '- Remove to Favorites' }
+              </button>
           </div>
           <div className="content">
             <img className="img" src={recipe.image} alt={recipe.title} />
