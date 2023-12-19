@@ -1,0 +1,14 @@
+.errorPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+    
+
+    .goBack {
+        text-decoration: none;
+        margin-top: 20px;
+        color: rgb(35, 19, 179);
+    }
+}
