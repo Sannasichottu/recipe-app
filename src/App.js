@@ -9,6 +9,7 @@ function App() {
 
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading]=useState(true)
+  const [searchQuery,setSearchQuery] = useState("")
 
   useEffect(() =>  {
     const fetchRecipesData = async () => {
@@ -25,14 +26,15 @@ function App() {
     fetchRecipesData()
   },[])
 
-
+const filteredRecipe = recipes.filter(rec => rec.title.toLowerCase().includes(searchQuery.toLowerCase()))
+const recipesToDisplay = searchQuery ? filteredRecipe : recipes
   return (
     <div className="App">
-     <Header title={'Recie App'} />
+     <Header title={'Recie App'} setSearchQuery={setSearchQuery} />
      
     
      
-     {loading ? <Loader name="My data is loading" /> :  <RecipesList recipes={recipes} />}
+     {loading ? <Loader name="My data is loading" /> :  <RecipesList recipes={recipesToDisplay} />}
 
       {/* {recipes.title} */}
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './SearchBar.scss'
 
-function SearchBar() {
+function SearchBar( {setSearchQuery} ) {
 
     const [searchText, setSearchText] = useState("")
 
@@ -10,6 +10,7 @@ function SearchBar() {
         e.preventDefault()
         console.log(searchText)
         setSearchText("")
+        setSearchQuery(searchText)
     }
 
   return (
